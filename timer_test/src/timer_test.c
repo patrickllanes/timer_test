@@ -14,6 +14,7 @@
 #include <string.h>
 #include <sys/time.h>
 
+void timerInit();
 void timer_handler(int signum);
 void runCounter (void);
 
@@ -21,6 +22,15 @@ int timer_trigger;
 
 int main(void)
 {
+	timerInit();
+
+	while(1){
+		runCounter();
+	}
+}
+
+void timerInit() {
+
 	// set up timer
 	struct sigaction sa;
 	struct itimerval timer;
@@ -39,10 +49,6 @@ int main(void)
 	/* Start a virtual timer. It counts down whenever this process is
 	 executing. */
 	setitimer(ITIMER_REAL, &timer, NULL);
-
-	while(1){
-		runCounter();
-	}
 }
 
 void timer_handler(int signum) {
