@@ -19,6 +19,7 @@ void timer_handler(int signum);
 void runCounter (void);
 
 int timer_trigger;
+int counter = 0;
 
 int main(void)
 {
@@ -58,7 +59,7 @@ void timer_handler(int signum) {
 void runCounter (void) {
 
 	if(timer_trigger == 1) {
-		printf("timer triggered\n");
+		printf("%d) timer triggered\n", ++counter);
 		timer_trigger = 0;
 	}
 }
